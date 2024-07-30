@@ -6,6 +6,10 @@ The script checks for the existence of a `package.json` file. If found, it will 
 
 It also checks for the existence of a `.prettierrc.json` file. If not found, it will copy the `.prettierrc.json` file from the `addprettier` folder to the root of your project. Otherwise, it will skip this step so you can preserve your existing `.prettierrc.json` options.
 
+## Why
+
+I'm lazy.
+
 ## Requirements
 
 - **PowerShell**: 5.1
