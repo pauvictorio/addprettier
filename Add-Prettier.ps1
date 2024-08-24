@@ -52,18 +52,20 @@ if (-not (Test-Path $localPrettierConfig)) {
     Write-Host "."
 }
 
-# Check if Prettier and @ianvs/prettier-plugin-sort-imports are already installed as dev dependencies
+# Check if Prettier, @ianvs/prettier-plugin-sort-imports, and prettier-plugin-tailwindcss are already installed as dev dependencies
 $packageJson = Get-Content ".\package.json" | ConvertFrom-Json
 $devDependencies = $packageJson.devDependencies
 
 $prettierInstalled = $devDependencies.PSObject.Properties.Name -contains "prettier"
-$pluginInstalled = $devDependencies.PSObject.Properties.Name -contains "@ianvs/prettier-plugin-sort-imports"
+$sortImportsPluginInstalled = $devDependencies.PSObject.Properties.Name -contains "@ianvs/prettier-plugin-sort-imports"
+$tailwindPluginInstalled = $devDependencies.PSObject.Properties.Name -contains "prettier-plugin-tailwindcss"
 
-if (-not $prettierInstalled -or -not $pluginInstalled) {
+if (-not $prettierInstalled -or -not $sortImportsPluginInstalled -or -not $tailwindPluginInstalled) {
     Write-Host
     $missingPackages = @()
     if (-not $prettierInstalled) { $missingPackages += "prettier" }
-    if (-not $pluginInstalled) { $missingPackages += "@ianvs/prettier-plugin-sort-imports" }
+    if (-not $sortImportsPluginInstalled) { $missingPackages += "@ianvs/prettier-plugin-sort-imports" }
+    if (-not $tailwindPluginInstalled) { $missingPackages += "prettier-plugin-tailwindcss" }
     
     $missingPackagesStr = $missingPackages -join ", "
 
@@ -82,13 +84,14 @@ if (-not $prettierInstalled -or -not $pluginInstalled) {
         Write-Status "done" "$missingPackagesStr installed."
 
         $prettierInstalled = $true
-        $pluginInstalled = $true
+        $sortImportsPluginInstalled = $true
+        $tailwindPluginInstalled = $true
     } else {
         Write-Status "error" "$missingPackagesStr will not be installed."
     }
 } else {
     Write-Host
-    Write-Host "Prettier and @ianvs/prettier-plugin-sort-imports are already installed as devDependencies. " -NoNewline
+    Write-Host "Prettier, @ianvs/prettier-plugin-sort-imports, and prettier-plugin-tailwindcss are already installed as devDependencies. " -NoNewline
     Write-Host "Skipping installation" -ForegroundColor Yellow -NoNewline
     Write-Host "."
 }
@@ -151,7 +154,7 @@ $scriptsToAdd.GetEnumerator() | ForEach-Object {
 $packageJson | ConvertTo-Json -Depth 100 | Set-Content $packageJsonPath
 Write-Status "done" "package.json has been updated."
 
-if (-not $prettierInstalled -or -not $pluginInstalled) {
+if (-not $prettierInstalled -or -not $sortImportsPluginInstalled -or -not $tailwindPluginInstalled) {
     exit
 }
 
