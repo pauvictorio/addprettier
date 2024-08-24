@@ -1,8 +1,8 @@
 # Add Prettier
 
-This is a simple PowerShell script to configure [Prettier](https://prettier.io/) with [@ianvs/prettier-plugin-sort-imports](https://github.com/ianvs/prettier-plugin-sort-imports) for a React/Next.js project.
+This is a simple PowerShell script to configure [Prettier](https://prettier.io/) with [@ianvs/prettier-plugin-sort-imports](https://github.com/ianvs/prettier-plugin-sort-imports) and [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) for a React/Next.js project.
 
-The script checks for the existence of a `package.json` file. If found, it will add the Prettier scripts inside `package.json`. Then, it will ask you if you want to install the two packages as devDependencies using pnpm. Otherwise, the script will exit immediately.
+The script checks for the existence of a `package.json` file. If found, it will add the Prettier scripts inside `package.json`. Then, it will ask you if you want to install the three packages as devDependencies using pnpm. Otherwise, the script will exit immediately.
 
 It also checks for the existence of a `.prettierrc.json` file. If not found, it will copy the `.prettierrc.json` file from this repository to the root of your project. Otherwise, it will skip this step so you can preserve your existing `.prettierrc.json` options.
 
@@ -60,6 +60,6 @@ It also checks for the existence of a `.prettierrc.json` file. If not found, it 
 
 ## Notes
 
-Modify the options inside `.prettierrc.json` to fit your needs. Check the Prettier [options](https://prettier.io/docs/en/options) you may use, as well as the @ianvs/prettier-plugin-sort-imports [NPM docs](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports) for more information.
+Modify the options inside `.prettierrc.json` to fit your needs. Check the Prettier [options](https://prettier.io/docs/en/options) you may use, as well as the @ianvs/prettier-plugin-sort-imports [NPM docs](https://www.npmjs.com/package/@ianvs/prettier-plugin-sort-imports) and prettier-plugin-tailwindcss GitHub repo for more information.
 
 The set of `importOrder` options inside `.prettierrc.json` is directly lifted from James Shopland's [blog](https://www.jamesshopland.com/blog/sort-imports-with-prettier), kindly check them out.
